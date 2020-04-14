@@ -3,11 +3,11 @@ import Card from './Card'
 
 export default function Modal(props){
 
-    function hideModal(e){
-    let target = e.target;
-    if(target.id == 'modal'){
+    function hideModal(e) {
+      let target = e.target;
+      if (target.id == "modal") {
         props.onHideModal();
-        }
+      }
     }
 
     return (

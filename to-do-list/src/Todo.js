@@ -14,37 +14,37 @@ export default function Todo(){
     const [showModal, setShowModal] = useState([]);
 
     useEffect(() => {
-        let savedItems = JSON.parse(localStorage.getItem(SAVED_ITEMS))
-        if (savedItems) {
-            setItems(savedItems);
-        }
-    }, [])
+      let savedItems = JSON.parse(localStorage.getItem(SAVED_ITEMS));
+      if (savedItems) {
+        setItems(savedItems);
+      }
+    }, []);
 
     useEffect(() => {
-        localStorage.setItem(SAVED_ITEMS, JSON.stringify(items))
-    }, [items])
+      localStorage.setItem(SAVED_ITEMS, JSON.stringify(items));
+    }, [items]);
 
 
-    function onAddItem(text){
-        let it = new Item(text);
-        setItems([...items, it])
-        onHideModal();
+    function onAddItem(text) {
+      let it = new Item(text);
+      setItems([...items, it]);
+      onHideModal();
     }
 
-    function onItemDeleted(item){
-        let filteredItems = items.filter(it => it.id !== item.id);
-        setItems(filteredItems);
+    function onItemDeleted(item) {
+      let filteredItems = items.filter(it => it.id !== item.id);
+      setItems(filteredItems);
     }
 
-    function onDone(item){
-        let uptadetItems = items.map(it => {
-            if(it.id == item.id){
-                it.done = !it.done;
-            }
-            return it;
-        })
-        
-        setItems(uptadetItems);
+    function onDone(item) {
+      let uptadetItems = items.map(it => {
+        if (it.id == item.id) {
+          it.done = !it.done;
+        }
+        return it;
+      });
+
+      setItems(uptadetItems);
     }
 
     function onHideModal(e){
@@ -54,7 +54,6 @@ export default function Todo(){
     return (
         <div className="container">
             <header className="header"><h1>Check-List do dia :</h1><button onClick={()=> {setShowModal(true)}}  className="addButton">+</button></header>
-            {/* <TodoForm onAddItem={onAddItem}></TodoForm> */}
             <List onDone={onDone} onItemDeleted={onItemDeleted} items={items}></List>
             <Modal show={showModal} onHideModal={onHideModal}><TodoForm onAddItem={onAddItem}></TodoForm></Modal>
         </div>
